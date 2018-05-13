@@ -20,8 +20,6 @@ public class HomeController {
     @Autowired
     private SpittleDAO spittleDAO;
 
-
-
     public void setSpitterDAO(SpitterDAO spitterDAO) {
         this.spitterDAO = spitterDAO;
     }
@@ -34,6 +32,6 @@ public class HomeController {
     public String homePage(Map<String, Object> model) {
         //model.put("spittles", spittleDAO.getLast(DEFAULT_COUNT));
 
-        return "index";
+        return "home";
     }
 }
