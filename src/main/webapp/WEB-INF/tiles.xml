@@ -14,4 +14,25 @@
     <definition name="home" extends="basicPage">
         <put-attribute name="left" value="/WEB-INF/views/filling/spittleList.jsp"/>
     </definition>
+
+    <definition name="spitter/spittles" extends="basicPage">
+        <put-attribute name="right" value="/WEB-INF/views/filling/spittleList.jsp"/>
+        <put-attribute name="left" value="/WEB-INF/views/filling/userInfo.jsp"/>
+    </definition>
+
+    <definition name="login" extends="basicPage">
+        <put-attribute name="left" value="/WEB-INF/views/filling/login.jsp"/>
+    </definition>
+
+    <definition name="register" extends="basicPage">
+        <put-attribute name="left" value="/WEB-INF/views/filling/register.jsp"/>
+    </definition>
+
+    <definition name="send" extends="basicPage">
+        <put-attribute name="left" value="/WEB-INF/views/filling/sendSpittle.jsp"/>
+    </definition>
+
+    <definition name="spitter/edit" extends="basicPage">
+        <put-attribute name="left" value="/WEB-INF/views/filling/editSpitter.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class SpittleHbmDAO implements SpittleDAO {
     }
 
     @Override
+    @Transactional
     public void addSpittle(Spittle spittle) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -30,6 +33,7 @@ public class SpittleHbmDAO implements SpittleDAO {
     }
 
     @Override
+    @Transactional
     public void updateSpittle(Spittle spittle) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -37,6 +41,7 @@ public class SpittleHbmDAO implements SpittleDAO {
     }
 
     @Override
+    @Transactional
     public void deleteSpittle(Spittle spittle) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -44,6 +49,7 @@ public class SpittleHbmDAO implements SpittleDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
     public Spittle getSpittleById(int id) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -51,6 +57,7 @@ public class SpittleHbmDAO implements SpittleDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
     public List<Spittle> getAll() {
         Session session = sessionFactory.getCurrentSession();
 
@@ -58,6 +65,7 @@ public class SpittleHbmDAO implements SpittleDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true)
     public List<Spittle> getLast(int amount) {
         Session session = sessionFactory.getCurrentSession();
 

@@ -2,10 +2,7 @@ package by.dima.dao;
 
 import by.dima.model.entity.Spitter;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.junit.*;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -84,6 +81,15 @@ public class SpitterHbmDAOTest {
         spitterHbmDAO.addSpitter(spitter);
 
         assertEquals(spitter, spitterHbmDAO.getSpitterById(spitter.getId()));
+
+        spitterHbmDAO.deleteSpitter(spitter);
+    }
+
+    @Test
+    public void getSpitterByUsername() {
+        spitterHbmDAO.addSpitter(spitter);
+
+        assertEquals(spitter, spitterHbmDAO.getSpitterByUsername(spitter.getUsername()));
 
         spitterHbmDAO.deleteSpitter(spitter);
     }

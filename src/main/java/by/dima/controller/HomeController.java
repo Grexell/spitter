@@ -2,12 +2,11 @@ package by.dima.controller;
 
 import by.dima.dao.SpitterDAO;
 import by.dima.dao.SpittleDAO;
+import by.dima.model.entity.Spitter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -29,8 +28,9 @@ public class HomeController {
     }
 
     @RequestMapping(value = {"/", "/home"})
-    public String homePage(Map<String, Object> model) {
-        //model.put("spittles", spittleDAO.getLast(DEFAULT_COUNT));
+    public String homePage(Model model) {
+        model.addAttribute(new Spitter());
+        model.addAttribute("spittles", spittleDAO.getLast(DEFAULT_COUNT));
 
         return "home";
     }

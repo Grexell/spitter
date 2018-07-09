@@ -1,6 +1,8 @@
 package by.dima.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,16 +15,21 @@ public class Spitter {
     @Column(name = "id_spitter")
     private int id;
 
-    @Column(name = "username")
+    @Pattern(regexp = "[\\w\\d]+", message = "username mast be from symbols or digits")
+    @Size(min = 4, max = 15, message = "")
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
+    @Size(min = 6, max = 15)
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
+    @Size(min = 6, max = 15)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "spitter")
+    @OneToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "spitter")
     private Set<Spittle> spittles;
 
     public Spitter() {

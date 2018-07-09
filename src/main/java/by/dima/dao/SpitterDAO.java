@@ -9,5 +9,6 @@ public interface SpitterDAO {
     void updateSpitter(Spitter spitter);
     void deleteSpitter(Spitter spitter);
     Spitter getSpitterById(int id);
+    Spitter getSpitterByUsername(String username);
     List<Spitter> getAll();
 }

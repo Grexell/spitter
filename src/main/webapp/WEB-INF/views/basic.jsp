@@ -1,10 +1,11 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@page pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8"/>
     <title><tiles:getAsString name="title"/></title>
-
-    <link rel="stylesheet" type="text/css" href="/resources/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
 </head>
 <body>
     <div class="wrapper">
