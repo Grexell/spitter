@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page isELIgnored="false" %>
-<sf:form modelAttribute="spittle" action="/${spitter}/spittle/send" method="post">
+<sf:form modelAttribute="spittle" action="/spitter/${spitter}/spittle/send" method="post">
     <sf:errors path="message" cssClass="error"/>
     <sf:textarea path="message"></sf:textarea>
     <sf:button></sf:button>

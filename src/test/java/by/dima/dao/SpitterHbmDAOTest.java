@@ -3,6 +3,7 @@ package by.dima.dao;
 import by.dima.model.entity.Spitter;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.junit.*;
 
 import java.util.List;
 

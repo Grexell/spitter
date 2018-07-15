@@ -1,5 +1,7 @@
 package by.dima.model.entity;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -24,8 +26,8 @@ public class Spitter {
     @Column(name = "password")
     private String password;
 
-    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
-    @Size(min = 6, max = 15)
+    @Email(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
+//    @Size(min = 6, max = 50)
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 

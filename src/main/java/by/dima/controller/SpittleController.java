@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/{username}/spittle")
+@RequestMapping("/spitter/{username}/spittle")
 public class SpittleController {
 
     @Autowired
