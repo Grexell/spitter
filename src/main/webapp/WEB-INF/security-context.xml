@@ -2,11 +2,11 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security  http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <http use-expressions="true">
-        <form-login login-processing-url="/static/j_spring_security_check" login-page="/spitter/login"
-                    authentication-failure-url="/spitter/login?error" authentication-success-forward-url="/"
+        <form-login login-processing-url="/spitter/login/" login-page="/spitter/login"
+                    authentication-failure-url="/spitter/login?error"
+                    authentication-success-forward-url="/"
                     username-parameter="username"
                     password-parameter="password"/>
         <logout logout-url="/spitter/logout" logout-success-url="/"/>
@@ -23,4 +23,6 @@
             <password-encoder ref="passwordEncoder"/>
         </authentication-provider>
     </authentication-manager>
+
+    <global-method-security pre-post-annotations="enabled"/>
 </beans:beans>

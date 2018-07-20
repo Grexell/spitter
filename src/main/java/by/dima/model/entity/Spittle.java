@@ -25,7 +25,7 @@ public class Spittle {
     @Column(name = "longtitude")
     private Double longitude;
 
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_spitter")
     private Spitter spitter;
 

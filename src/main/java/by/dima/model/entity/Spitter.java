@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,8 +32,8 @@ public class Spitter {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "spitter")
-    private Set<Spittle> spittles;
+    @OneToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "spitter")
+    private List<Spittle> spittles;
 
     public Spitter() {
     }
@@ -75,11 +76,11 @@ public class Spitter {
         this.email = email;
     }
 
-    public Set<Spittle> getSpittles() {
+    public List<Spittle> getSpittles() {
         return spittles;
     }
 
-    public void setSpittles(Set<Spittle> spittles) {
+    public void setSpittles(List<Spittle> spittles) {
         this.spittles = spittles;
     }
 

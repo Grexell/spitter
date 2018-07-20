@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<form method="post" action="/static/j_spring_security_check">
+<form method="post" action="/spitter/login/">
     <div>
         <label for="login_username">Username</label>
         <input type="text" id="login_username" size="15" maxlength="15" name="username"/>

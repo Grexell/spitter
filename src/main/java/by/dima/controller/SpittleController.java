@@ -5,6 +5,8 @@ import by.dima.dao.SpittleDAO;
 import by.dima.model.entity.Spitter;
 import by.dima.model.entity.Spittle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ public class SpittleController {
     private SpittleDAO spittleDAO;
 
     @RequestMapping("/")
+    @PreAuthorize("#username == principal.username")
     public String getSpittleWriteView(Model model, @PathVariable String username){
         model.addAttribute("spitter", username);
         model.addAttribute(new Spittle());
@@ -33,6 +36,7 @@ public class SpittleController {
     }
 
     @RequestMapping("/send")
+    @PreAuthorize("#username == principal.username")
     public String sendSpitter(@Valid @ModelAttribute Spittle spittle, @PathVariable String username, Model model, BindingResult bindingResult){
         Spitter spitter = spitterDAO.getSpitterByUsername(username);
 

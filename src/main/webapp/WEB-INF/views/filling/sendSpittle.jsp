@@ -10,5 +10,5 @@
 <sf:form modelAttribute="spittle" action="/spitter/${spitter}/spittle/send" method="post">
     <sf:errors path="message" cssClass="error"/>
     <sf:textarea path="message"></sf:textarea>
-    <sf:button></sf:button>
+    <sf:button>Send</sf:button>
 </sf:form>
