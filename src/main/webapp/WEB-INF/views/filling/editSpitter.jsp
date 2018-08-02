@@ -6,22 +6,26 @@
   Time: 21:50
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<sf:form modelAttribute="spitter" action="/spitter/register" method="post">
-    <div>
-        <sf:errors path="username" cssClass="error"/>
-        <label for="register_username">Username</label>
-        <sf:input id="register_username" size="15" maxlength="15" path="username"></sf:input>
-    </div>
-    <div>
-        <sf:errors path="email" cssClass="error"/>
-        <label for="register_email">Email</label>
-        <sf:input id="register_email" size="15" path="email"></sf:input>
-    </div>
-    <div>
-        <sf:errors path="password" cssClass="error"/>
-        <label for="register_password">Password</label>
-        <sf:password id="register_password" size="15" maxlength="15" path="password"></sf:password>
-    </div>
-    <sf:button>Save</sf:button>
-</sf:form>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<div class="left left-1-3 material-box">
+    <h1 class="h-text">Edit info</h1>
+    <sf:form modelAttribute="spitter" action="/spitter/edit/${spitter.username}" method="post" enctype="multipart/form-data" class="form">
+        <div class="input-field">
+            <sf:errors path="email" cssClass="error"/>
+            <label for="register_email">Email</label>
+            <sf:input id="register_email" size="15" path="email" placeholder="email"></sf:input>
+        </div>
+        <div class="input-field">
+            <sf:errors path="password" cssClass="error"/>
+            <label for="register_password">Password</label>
+            <sf:password id="register_password" size="15" maxlength="15" path="password"
+                         placeholder="Your password"></sf:password>
+        </div>
+        <div class="button-wrapper">
+            <input type="file" name="file"/>
+        </div>
+        <div class="button-wrapper">
+            <button class="button material-element">Save</button>
+        </div>
+    </sf:form>
+</div>

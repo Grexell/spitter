@@ -1,10 +1,2 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: demes
-  Date: 5/13/2018
-  Time: 9:53 AM
-  To change this template use File | Settings | File Templates.
---%>
-<div class="container">
-    footer
-</div>
+<h1>Spitter LLC</h1>
+<p>2018-2018</p>

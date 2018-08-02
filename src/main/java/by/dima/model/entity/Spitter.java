@@ -3,6 +3,7 @@ package by.dima.model.entity;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -28,12 +29,17 @@ public class Spitter {
     private String password;
 
     @Email(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
-//    @Size(min = 6, max = 50)
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToMany(cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, mappedBy = "spitter")
+    @OneToMany(mappedBy = "spitter")
     private List<Spittle> spittles;
+
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "activated")
+    private boolean activated;
 
     public Spitter() {
     }
@@ -82,6 +88,22 @@ public class Spitter {
 
     public void setSpittles(List<Spittle> spittles) {
         this.spittles = spittles;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     @Override

@@ -17,8 +17,11 @@
 
     <beans:bean id="userService" class="by.dima.security.LoginService"/>
     <beans:bean id="passwordEncoder" class="by.dima.security.UserPasswordEncoder"/>
+    <beans:bean class="by.dima.security.ManualLogin">
+        <beans:property name="authenticationManager" ref="authManager"/>
+    </beans:bean>
 
-    <authentication-manager>
+    <authentication-manager id="authManager">
         <authentication-provider user-service-ref="userService">
             <password-encoder ref="passwordEncoder"/>
         </authentication-provider>

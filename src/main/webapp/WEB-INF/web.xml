@@ -2,7 +2,11 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
   <display-name>Archetype Created Web Application</display-name>
 
   <context-param>
@@ -28,8 +32,14 @@
     <servlet-name>main</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
+    <multipart-config>
+      <location></location>
+      <max-file-size>12582912</max-file-size>
+      <max-request-size>22582912</max-request-size>
+      <file-size-threshold>22582912</file-size-threshold>
+    </multipart-config>
   </servlet>
-  
+
   <servlet-mapping>
     <servlet-name>main</servlet-name>
     <url-pattern>/</url-pattern>

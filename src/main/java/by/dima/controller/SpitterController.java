@@ -3,22 +3,20 @@ package by.dima.controller;
 import by.dima.dao.SpitterDAO;
 import by.dima.dao.SpittleDAO;
 import by.dima.model.entity.Spitter;
+import by.dima.model.logic.FileHandler;
+import by.dima.security.UserLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/spitter")
@@ -29,6 +27,12 @@ public class SpitterController {
 
     @Autowired
     private SpittleDAO spittleDAO;
+
+    @Autowired
+    private FileHandler fileHandler;
+
+    @Autowired
+    private UserLogin userLogin;
 
     public void setSpitterDAO(SpitterDAO spitterDAO) {
         this.spitterDAO = spitterDAO;
@@ -71,22 +75,37 @@ public class SpitterController {
 
     @RequestMapping(path = "/edit/{username}", method = RequestMethod.POST)
     @PreAuthorize("#username == principal.username")
-    public String editSpitter(@Valid Spitter spitter, Errors errors) {
-        if (errors.hasErrors()) {
-            return "spitter/edit";
+    public String editSpitter(HttpServletRequest request, @PathVariable String username, @RequestParam String password, @RequestParam String email, @RequestParam("file") MultipartFile file) {
+        Spitter oldSpitter = spitterDAO.getSpitterByUsername(username);
+        if (password != null && !(password == "") && !oldSpitter.getPassword().equals(password)) {
+            oldSpitter.setPassword(password);
         }
 
-        spitterDAO.updateSpitter(spitter);
-        return "redirect:/spitter/" + spitter.getUsername();
+        if (email != null && !(email == "") && !oldSpitter.getEmail().equals(email)) {
+            oldSpitter.setEmail(email);
+        }
+        if (file != null) {
+            String filename = oldSpitter.getId() + file.getOriginalFilename();
+            fileHandler.loadFile(filename, file);
+            oldSpitter.setImage(filename);
+        }
+
+        spitterDAO.updateSpitter(oldSpitter);
+        userLogin.login(request, oldSpitter.getUsername(), oldSpitter.getPassword());
+
+        return "redirect:/spitter/" + oldSpitter.getUsername();
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public String register(@Valid Spitter spitter, Errors errors) {
+    public String register(HttpServletRequest request, @Valid Spitter spitter, Errors errors) {
         if (errors.hasErrors()) {
             return "register";
         }
 
         spitterDAO.addSpitter(spitter);
+
+        userLogin.login(request, spitter.getUsername(), spitter.getPassword());
+
         return "redirect:/spitter/edit/" + spitter.getUsername();
     }
 }
